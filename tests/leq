@@ -1,0 +1,18 @@
+data eq : (forall t : type) t -> t -> type {
+  refl : (forall t : type) (forall x : t) eq t x x
+}
+
+data nat : type {
+  zero : nat;
+  suc : nat -> nat
+}
+
+data leq : nat -> nat -> type {
+  bottom : (forall n : nat) leq zero n;
+  shift : (forall n : nat) (forall m : nat) leq n m -> leq (suc n) (suc m)
+}
+
+let one = suc zero in
+let two = suc one in
+let three = suc two in
+shift zero two (bottom two) : leq one three  // 1 <= 3 because 0 <= 2 and we can shift both up by one

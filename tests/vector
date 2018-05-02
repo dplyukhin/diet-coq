@@ -1,0 +1,16 @@
+data nat : type {
+  zero : nat;
+  suc : nat -> nat
+}
+
+data vec : type -> nat -> type {
+  nil : (forall t : type) (vec t zero) ;
+  cons : (forall t : type) (forall n : nat) t -> (vec t n) -> (vec t (suc n))
+}
+
+// The args of cons are: The type of its elements (nat) the 
+// length of the rest of the vector (zero) and the element
+// to insert (also zero).
+// The arg of nil is the type of elements in the list.
+
+cons nat zero zero (nil nat)

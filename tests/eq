@@ -1,0 +1,16 @@
+// An element of the type `eq t x y` is a proof that for `x y : t`,
+// x is equal to y. We can only do this by exhibiting `refl t x`.
+
+// A crucial reason why this works is that dependent type checking
+// involves normalization. Hence `refl nat 2 : eq nat 2 (1 + 1)`.
+
+data eq : (forall t : type) t -> t -> type {
+  refl : (forall t : type) (forall x : t) eq t x x
+}
+
+data b : type {
+  t : b;
+  f : b
+}
+
+refl b t : eq b t t  // My proof that true is true!

@@ -1,0 +1,8 @@
+// We must explicitly instantiate polymorphic functions like `id` with the type
+// that they act on. Below, the `id` on the right is instantiated to be a
+// function `type -> type`. Consequently, the `id` on the left should take
+// `(type -> type) -> (type -> type)`.
+// The result will be the type of its argument, i.e. `type -> type`.
+
+let id = (lambda t . (lambda x . x)) : (forall t : type) t -> t in
+id (type -> type) (id type)
